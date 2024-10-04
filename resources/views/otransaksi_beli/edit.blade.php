@@ -64,12 +64,12 @@
                                     <label for="KODES" class="form-label">SUPLIER</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control KODES" id="KODES" name="KODES" placeholder="Masukkan Suplier#" value="{{$header->KODES}}" readonly>
+                                    <input type="text" class="form-control KODES" id="KODES" onclick="select()" name="KODES" placeholder="Masukkan Suplier#" value="{{$header->KODES}}" readonly>
                                 </div>
 								
                                 
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control NAMAS" id="NAMAS" name="NAMAS" placeholder="Nama" value="{{$header->NAMAS}}" readonly>
+                                    <input type="text" class="form-control NAMAS" id="NAMAS" onclick="select()" name="NAMAS" placeholder="Nama" value="{{$header->NAMAS}}" readonly>
                                 </div>
 					
 								<!-- <div class="col-md-3 input-group">
@@ -165,7 +165,7 @@
                                 </div>
 								
                                 <div class="col-md-1" align="right">
-                                    <input type="text" class="form-control RPRATE" id="RPRATE" name="RPRATE" placeholder="RPRATE" value="{{ number_format($header->RPRATE, 0, '.', ',') }}" style="text-align: center; width:150px" >
+                                    <input type="text" class="form-control RPRATE" onclick="select()" id="RPRATE" name="RPRATE" placeholder="RPRATE" value="{{ number_format($header->RPRATE, 0, '.', ',') }}" style="text-align: center; width:150px" >
                                 </div>
                             </div>
 
@@ -175,25 +175,25 @@
 									<label for="TRUCK" class="form-label">TRUCK</label>
 								</div>
 								<div class="col-md-2" align="left">
-									<input type="text" class="form-control TRUCK" id="TRUCK" name="TRUCK" placeholder="-" value="{{$header->TRUCK}}">
+									<input type="text" class="form-control TRUCK" onclick="select()" id="TRUCK" name="TRUCK" placeholder="-" value="{{$header->TRUCK}}">
 								</div>
 								
                                 <div class="col-md-1" align="right">
                                     <label for="BA" class="form-label">BA</label>
                                 </div>
                                 <div class="col-md-1" align="left">
-                                    <input type="text" class="form-control BA" id="BA" name="BA" placeholder="BA" value="{{ number_format($header->BA, 0, '.', ',') }}" style="text-align: right; width:100px" >
+                                    <input type="text" class="form-control BA" onclick="select()" id="BA" name="BA" placeholder="BA" value="{{ number_format($header->BA, 0, '.', ',') }}" style="text-align: right; width:100px" >
                                 </div>
 								
                                 <div class="col-md-1" align="right">
                                     <label for="BM" class="form-label">BM</label>
                                 </div>
                                 <div class="col-md-1" align="left">
-                                    <input type="text" class="form-control BM" id="BM" name="BM" placeholder="BM" value="{{ number_format($header->BM, 0, '.', ',') }}" style="text-align: right; width:100px" >
+                                    <input type="text" class="form-control BM" onclick="select()" id="BM" name="BM" placeholder="BM" value="{{ number_format($header->BM, 0, '.', ',') }}" style="text-align: right; width:100px" >
                                 </div>
 								
                                 <div class="col-md-1" align="right">
-                                    <input type="text" class="form-control RPHARGA" id="RPHARGA" name="RPHARGA" placeholder="RPHARGA" value="{{ number_format($header->RPHARGA, 0, '.', ',') }}" style="text-align: right; width:150px" >
+                                    <input type="text" class="form-control RPHARGA" onclick="select()" id="RPHARGA" name="RPHARGA" placeholder="RPHARGA" value="{{ number_format($header->RPHARGA, 0, '.', ',') }}" style="text-align: right; width:150px" >
                                 </div>
 
 								<div class="col-md-1"align="right">
@@ -218,25 +218,25 @@
                                     <label for="BAG" class="form-label">BAG</label>
                                 </div>
                                 <div class="col-md-2" align="left">
-                                    <input type="text" class="form-control BAG" id="BAG" name="BAG" placeholder="BAG" value="{{ number_format($header->BAG, 0, '.', ',') }}" style="text-align: right; width:140px" >
+                                    <input type="text" class="form-control BAG" onclick="select()" id="BAG" name="BAG" placeholder="BAG" value="{{ number_format($header->BAG, 0, '.', ',') }}" style="text-align: right; width:140px" >
                                 </div>
 								
                                 <div class="col-md-1" align="right">
                                     <label for="KA" class="form-label">KA</label>
                                 </div>
                                 <div class="col-md-1" align="left">
-                                    <input type="text" class="form-control KA" id="KA" name="KA" placeholder="KA" value="{{ number_format($header->KA, 2, '.', ',') }}" style="text-align: right; width:100px" >
+                                    <input type="text" class="form-control KA" onclick="select()" id="KA" name="KA" placeholder="KA" value="{{ number_format($header->KA, 2, '.', ',') }}" style="text-align: right; width:100px" >
                                 </div>
 								
                                 <div class="col-md-1" align="right">
                                     <label for="REF" class="form-label">REF</label>
                                 </div>
                                 <div class="col-md-1" align="left">
-                                    <input type="text" class="form-control REF" id="REF" name="REF" placeholder="REF" value="{{ number_format($header->REF, 2, '.', ',') }}" style="text-align: right; width:100px" >
+                                    <input type="text" class="form-control REF" onclick="select()" id="REF" name="REF" placeholder="REF" value="{{ number_format($header->REF, 2, '.', ',') }}" style="text-align: right; width:100px" >
                                 </div>
 
                                 <div class="col-md-1" align="right">
-                                    <input type="text" class="form-control RPTOTAL" id="RPTOTAL" name="RPTOTAL" placeholder="RPTOTAL" value="{{ number_format($header->RPTOTAL, 0, '.', ',') }}" style="text-align: right; width:150px" >
+                                    <input type="text" class="form-control RPTOTAL" onclick="select()" id="RPTOTAL" name="RPTOTAL" placeholder="RPTOTAL" value="{{ number_format($header->RPTOTAL, 0, '.', ',') }}" style="text-align: right; width:150px" >
                                 </div>
 								
                                 <div class="col-md-1"align="right">
@@ -301,7 +301,7 @@
                                     <label for="TOTAL" class="form-label">TOTAL</label>
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="text" class="form-control TOTAL" id="TOTAL" name="TOTAL" placeholder="TOTAL" value="{{ number_format($header->TOTAL, 2, '.', ',') }}" style="text-align: right; width:150px" readonly>
+                                    <input type="text" class="form-control TOTAL" onclick="select()" id="TOTAL" name="TOTAL" placeholder="TOTAL" value="{{ number_format($header->TOTAL, 2, '.', ',') }}" style="text-align: right; width:150px" readonly>
                                 </div>
                             </div>
 
@@ -319,7 +319,7 @@
                                     <label for="KAPAL" class="form-label">KAPAL</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control KAPAL" id="KAPAL" name="KAPAL" placeholder="Masukkan Kapal" value="{{$header->KAPAL}}">
+                                    <input type="text" class="form-control KAPAL" onclick="select()" id="KAPAL" name="KAPAL" placeholder="Masukkan Kapal" value="{{$header->KAPAL}}">
                                 </div>
 								
                             </div>
@@ -329,7 +329,7 @@
                                     <label for="NOTES" class="form-label">NOTES</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control NOTES" id="NOTES" name="NOTES" placeholder="Masukkan Notes" value="{{$header->NOTES}}">
+                                    <input type="text" class="form-control NOTES" onclick="select()" id="NOTES" name="NOTES" placeholder="Masukkan Notes" value="{{$header->NOTES}}">
                                 </div>
                             </div>
 
