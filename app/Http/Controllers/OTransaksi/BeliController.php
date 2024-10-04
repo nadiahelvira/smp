@@ -347,10 +347,18 @@ class BeliController extends Controller
 
 
         // Insert Header
+
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        ///
+
         $beli = Beli::create(
             [
                 'NO_BUKTI'         => $no_bukti,
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2),
+                // 
                 'PER'              => $periode,
                 'NO_BL'            => ($request['NO_PO'] == null) ? "" : $request['NO_BL'],
                 'NO_PO'            => ($request['NO_PO'] == null) ? "" : $request['NO_PO'],
@@ -383,7 +391,10 @@ class BeliController extends Controller
                 'USRNM'            => Auth::user()->username,
                 'created_by'       => Auth::user()->username,
 				
-                'TRUCK'            => ($request['TRUCK'] == null) ? "" : $request['TRUCK'],
+                //set huruf kapital
+                'TRUCK'            => ($request['TRUCK'] == null) ? "" : strtoupper($request['TRUCK']),
+                //
+
                 'BA'               => (float) str_replace(',', '', $request['BA']),
                 'BP'               => (float) str_replace(',', '', $request['BP']),
                 'BAG'              => (float) str_replace(',', '', $request['BAG']),
@@ -600,7 +611,7 @@ class BeliController extends Controller
  
          
          return view('otransaksi_beli.edit', $data)
-		 ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'flagz' =>$this->FLAGZ, 'judul', $this->judul ]);
+		 ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'flagz' => $this->FLAGZ, 'judul'=> $this->judul ]);
 			 
     
       

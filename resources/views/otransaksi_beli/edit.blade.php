@@ -8,6 +8,12 @@
     .form-control:focus {
         background-color: #E0FFFF !important;
     }
+
+	/* set capslock otomatis */
+	.TRUCK{
+		text-transform: uppercase;
+	}
+	/*  */
 </style>
 
 
@@ -1068,17 +1074,48 @@
 				alert("PO# Harus diisi.");
 			}
 			
-			if ( tgl.substring(3,5) != bulanPer ) 
-			{
-				check = '1';
-				alert("Bulan tidak sama dengan Periode");
-			}	
+			// cek save format tgl otomatis
+
+			if (tgl.includes("-")) {
+				if ( tgl.substring(3,5) != bulanPer ) 
+				{
+					check = '1';
+					alert("Bulan tidak sama dengan Periode");
+				}	
+				
+				if ( tgl.substring(tgl.length-4) != tahunPer )
+				{
+					check = '1';
+					alert("Tahun tidak sama dengan Periode");
+				}	
+			}else{
+				if ( tgl.substring(2,4) != bulanPer ) 
+				{
+					check = '1';
+					alert("Bulan tidak sama dengan Periode");
+				}	
+				
+				if ( tgl.substring(tgl.length-4) != tahunPer )
+				{
+					check = '1';
+					alert("Tahun tidak sama dengan Periode");
+				}
+			}
+
+			//
+
+
+			// if ( tgl.substring(3,5) != bulanPer ) 
+			// {
+			// 	check = '1';
+			// 	alert("Bulan tidak sama dengan Periode");
+			// }	
 			
-			if ( tgl.substring(tgl.length-4) != tahunPer )
-			{
-				check = '1';
-				alert("Tahun tidak sama dengan Periode");
-		    }	 
+			// if ( tgl.substring(tgl.length-4) != tahunPer )
+			// {
+			// 	check = '1';
+			// 	alert("Tahun tidak sama dengan Periode");
+		    // }	 
 
 	    
 			if ( flagz =='TH'  ){

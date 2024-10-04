@@ -325,15 +325,28 @@ class JualController extends Controller
 
         // ganti 10
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        ///
+
         $jual = Jual::create(
             [
                 'NO_BUKTI'         => $no_bukti,
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2),
+                // 
+                
                 'PER'              => $periode,
                 'NO_SO'            => ($request['NO_SO'] == null) ? "" : $request['NO_SO'],
                 'KODEC'            => ($request['KODEC'] == null) ? "" : $request['KODEC'],
                 'NAMAC'            => ($request['NAMAC'] == null) ? "" : $request['NAMAC'],
-                'TRUCK'            => ($request['TRUCK'] == null) ? "" : $request['TRUCK'],
+                
+                //set huruf kapital
+                'TRUCK'            => ($request['TRUCK'] == null) ? "" : strtoupper($request['TRUCK']),
+                //
+
                 //'SOPIR'            => ($request['SOPIR'] == null) ? "" : $request['SOPIR'],
                 'ALAMAT'           => ($request['ALAMAT'] == null) ? "" : $request['ALAMAT'],
                 'KOTA'             => ($request['KOTA'] == null) ? "" : $request['KOTA'],
@@ -593,7 +606,7 @@ class JualController extends Controller
  
          
          return view('otransaksi_jual.edit', $data)
-		 ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'flagz' =>$this->FLAGZ, 'judul', $this->judul ]);
+		 ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'flagz' => $this->FLAGZ, 'judul' => $this->judul ]);
 			 
     
       

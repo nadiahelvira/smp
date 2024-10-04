@@ -8,6 +8,12 @@
     .form-control:focus {
         background-color: #E0FFFF !important;
     }
+
+	/* set capslock otomatis */
+	.TRUCK{
+		text-transform: uppercase;
+	}
+	/*  */
 </style>
 
 @section('content')
@@ -85,7 +91,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                   <input class="form-control date" id="TGL" name="TGL" data-date-format="dd-mm-yyyy" type="text" autocomplete="off" value="{{date('d-m-Y',strtotime($header->TGL))}}" style="width:140px">
+                                   <input class="form-control date" onclick="select()"  id="TGL" name="TGL" data-date-format="dd-mm-yyyy" type="text" autocomplete="off" value="{{date('d-m-Y',strtotime($header->TGL))}}" style="width:140px">
                                 </div>
 								
                                 <div class="col-md-2">
@@ -118,14 +124,14 @@
                                     <label for="KD_BRG" class="form-label">BARANG</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" class="form-control KD_BRG" id="KD_BRG" name="KD_BRG" placeholder="Masukkan Barang" value="{{$header->KD_BRG}}" readonly style="width:140px">
+                                    <input type="text" class="form-control KD_BRG" onclick="select()"  id="KD_BRG" name="KD_BRG" placeholder="Masukkan Barang" value="{{$header->KD_BRG}}" readonly style="width:140px">
                                 </div>
 
 								<div class="col-md-2">
 								</div>
 								
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control KOTA" id="KOTA" name="KOTA" placeholder="Kota" value="{{$header->KOTA}}" readonly>
+                                    <input type="text" class="form-control KOTA" onclick="select()"  id="KOTA" name="KOTA" placeholder="Kota" value="{{$header->KOTA}}" readonly>
                                 </div>
                             </div>
 
@@ -134,7 +140,7 @@
                                     <label class="form-label"></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control NA_BRG" id="NA_BRG" name="NA_BRG" placeholder="-" value="{{$header->NA_BRG}}" readonly>
+                                    <input type="text" class="form-control NA_BRG" onclick="select()"  id="NA_BRG" name="NA_BRG" placeholder="-" value="{{$header->NA_BRG}}" readonly>
                                 </div>
                             </div>
 							
@@ -144,7 +150,7 @@
 									<label class="form-label">HARGA</label>
 								</div>
 								<div class="col-md-1">
-									<input type="text" onkeyup="hitung()"  class="form-control HARGA" id="HARGA" name="HARGA" placeholder="Masukkan Harga" onclick="select()" onkeyup="hitung()" value="{{ number_format($header->HARGA, 2, '.', ',') }}" style="text-align: right; width:140px">
+									<input type="text" onkeyup="hitung()"  onclick="select()"  class="form-control HARGA" id="HARGA" name="HARGA" placeholder="Masukkan Harga" value="{{ number_format($header->HARGA, 2, '.', ',') }}" style="text-align: right; width:140px">
 								</div>
 								
                                 <div class="col-md-1"align="right">
@@ -158,7 +164,7 @@
                                 </div>
 								
                                 <div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1" align="right">
-                                    <input type="text" class="form-control RPRATE" id="RPRATE" name="RPRATE" placeholder="RPRATE" value="{{ number_format($header->RPRATE, 0, '.', ',') }}" style="text-align: right; width:140px" >
+                                    <input type="text"  onclick="select()"  class="form-control RPRATE" id="RPRATE" name="RPRATE" placeholder="RPRATE" value="{{ number_format($header->RPRATE, 0, '.', ',') }}" style="text-align: right; width:140px" >
                                 </div>
                             </div>
 
@@ -168,14 +174,14 @@
 									<label for="TRUCK" class="form-label">TRUCK</label>
 								</div>
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1">
-									<input type="text" class="form-control TRUCK" id="TRUCK" name="TRUCK" placeholder="-" value="{{$header->TRUCK}}" style="text-align: right; width:140px">
+									<input type="text"  onclick="select()"  class="form-control TRUCK" id="TRUCK" name="TRUCK" placeholder="-" value="{{$header->TRUCK}}" style="text-align: right; width:140px">
 								</div>
 
 								<div class="col-md-5">
 								</div>
 
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1" align="right">
-									<input type="text" class="form-control RPHARGA" id="RPHARGA" name="RPHARGA" placeholder="RPHARGA" value="{{ number_format($header->RPHARGA, 0, '.', ',') }}" style="text-align: right; width:140px" >
+									<input type="text"  onclick="select()"  class="form-control RPHARGA" id="RPHARGA" name="RPHARGA" placeholder="RPHARGA" value="{{ number_format($header->RPHARGA, 0, '.', ',') }}" style="text-align: right; width:140px" >
 								</div>
 
 							</div>
@@ -186,28 +192,28 @@
                                     <label for="QTY" class="form-label">BAG</label>
                                 </div>
                                 <div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1">
-                                    <input type="text"  class="form-control QTY" id="QTY" name="QTY" placeholder="Masukkan Bag" value="{{ number_format($header->QTY, 2, '.', ',') }}" style="text-align: right; width:100px" >
+                                    <input type="text" onclick="select()"  class="form-control QTY" id="QTY" name="QTY" placeholder="Masukkan Bag" value="{{ number_format($header->QTY, 2, '.', ',') }}" style="text-align: right; width:100px" >
                                 </div>
 
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1" align="right">
                                     <label for="ATR" class="form-label">ATR</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control ATR" id="ATR" name="ATR" placeholder=""  value="{{$header->ATR}}" style="text-align: right; width:100px" >
+                                    <input type="text" onclick="select()" class="form-control ATR" id="ATR" name="ATR" placeholder=""  value="{{$header->ATR}}" style="text-align: right; width:100px" >
                                 </div>
 
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1" align="right">
 									<label for="KA" class="form-label">KA</label>
 								</div>
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1">
-									<input type="text"  class="form-control KA" id="KA" name="KA" placeholder="Masukkan Bag" value="{{ number_format($header->KA, 2, '.', ',') }}" style="text-align: right; width:100px" >
+									<input type="text"  class="form-control KA" onclick="select()"  id="KA" name="KA" placeholder="Masukkan Bag" value="{{ number_format($header->KA, 2, '.', ',') }}" style="text-align: right; width:100px" >
 								</div>
 
 								<div class="col-md-1">
 								</div>
 
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1" align="right">
-									<input type="text" class="form-control RPTOTAL" id="RPTOTAL" name="RPTOTAL" placeholder="RPTOTAL" value="{{ number_format($header->RPTOTAL, 0, '.', ',') }}" style="text-align: right; width:140px" >
+									<input type="text" class="form-control RPTOTAL" onclick="select()" id="RPTOTAL" name="RPTOTAL" placeholder="RPTOTAL" value="{{ number_format($header->RPTOTAL, 0, '.', ',') }}" style="text-align: right; width:140px" >
 								</div>
 
                                 <div class="col-md-1"align="right">
@@ -224,14 +230,14 @@
                                     <label for="KG" class="form-label">KG</label>
                                 </div>
                                 <div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-2">
-                                    <input type="text"  class="form-control KG" id="KG" name="KG" placeholder="" value="{{ number_format($header->KG, 2, '.', ',') }}" style="text-align: right; width:180px" >
+                                    <input type="text" onclick="select()" class="form-control KG" id="KG" name="KG" placeholder="" value="{{ number_format($header->KG, 2, '.', ',') }}" style="text-align: right; width:180px" >
                                 </div>
 
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1" align="right">
                                     <label for="TOTAL" class="form-label">TOTAL</label>
                                 </div>
                                 <div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-2">
-                                    <input type="text"  class="form-control TOTAL" id="TOTAL" name="TOTAL" placeholder="" value="{{ number_format($header->TOTAL, 0, '.', ',') }}" style="text-align: right; width:180px" >
+                                    <input type="text"  class="form-control TOTAL" onclick="select()"  id="TOTAL" name="TOTAL" placeholder="" value="{{ number_format($header->TOTAL, 0, '.', ',') }}" style="text-align: right; width:180px" >
                                 </div>
 
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1" align="right">
@@ -245,7 +251,7 @@
 									<label for="POT" class="form-label">POT</label>
 								</div>
 								<div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-1">
-									<input type="text"  class="form-control POT" id="POT" name="POT" placeholder="" value="{{ number_format($header->POT, 2, '.', ',') }}" style="text-align: right; width:180px" >
+									<input type="text"  class="form-control POT" id="POT" onclick="select()"  name="POT" placeholder="" value="{{ number_format($header->POT, 2, '.', ',') }}" style="text-align: right; width:180px" >
 								</div>
 							</div>
 
@@ -255,7 +261,7 @@
                                     <label for="KGBAG" class="form-label">KG/BAG</label>
                                 </div>
                                 <div {{($flagz == 'JL') ? '' : 'hidden' }} class="col-md-2">
-                                    <input type="text"  class="form-control KGBAG" id="KGBAG" name="KGBAG" placeholder="Masukkan Kg/Bag" value="{{ number_format($header->KGBAG, 2, '.', ',') }}" style="text-align: right; width:180px" >
+                                    <input type="text"  class="form-control KGBAG" onclick="select()"  id="KGBAG" name="KGBAG" placeholder="Masukkan Kg/Bag" value="{{ number_format($header->KGBAG, 2, '.', ',') }}" style="text-align: right; width:180px" >
                                 </div>
 
                                 <div class="col-md-1"align="right">
@@ -295,7 +301,7 @@
                                     <label for="NOTES" class="form-label">NOTES</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control NOTES" id="NOTES" name="NOTES" placeholder="Masukkan Notes"  value="{{$header->NOTES}}">
+                                    <input type="text" class="form-control NOTES" onclick="select()"  id="NOTES" name="NOTES" placeholder="Masukkan Notes"  value="{{$header->NOTES}}">
                                 </div>
                             </div>					
 
@@ -371,15 +377,14 @@
 				<thead>
 					<tr>
 						<th>So#</th>
+						<th>Tgl</th>
 						<th>Customer</th>
-						<th>Tanggal</th>
-						<th>Kota</th>
 						<th>Barang</th>
-						<th>Harga</th>
 						<th>Kg</th>
-						<th>Kirim</th>						
-						<th>Sisa</th>	
-												
+						<th>Kirim</th>
+						<th>Sisa</th>
+						<th>Harga</th>	
+						<th>Notes</th>				
 
 					</tr>
 				</thead>
@@ -626,14 +631,15 @@
 								
 								dTableBSo.row.add([
 									'<a href="javascript:void(0);" onclick="chooseSo(\''+resp[i].NO_SO+'\', \''+resp[i].KODEC+'\', \''+resp[i].NAMAC+'\', \''+resp[i].TGL+'\', \''+resp[i].KOTA+'\' , \''+resp[i].KD_BRG+'\' , \''+resp[i].NA_BRG+'\' , \''+resp[i].HARGA+'\', \''+resp[i].KG+'\', \''+resp[i].KIRIM+'\', \''+resp[i].SISA+'\'  )">'+resp[i].NO_SO+'</a>',
-									resp[i].NAMAC,
 									resp[i].TGL,
-									resp[i].KOTA,
+									resp[i].NAMAC,
 									resp[i].NA_BRG,
-									resp[i].HARGA,	
-									resp[i].KG,
-									resp[i].KIRIM,
-									resp[i].SISA,
+									'<div style="text-align: right">' +Intl.NumberFormat('en-US').format(resp[i].KG)+ '</div>',
+									'<div style="text-align: right">' +Intl.NumberFormat('en-US').format(resp[i].KIRIM)+ '</div>',
+									'<div style="text-align: right">' +Intl.NumberFormat('en-US').format(resp[i].SISA)+ '</div>',
+									'<div style="text-align: right">' +Intl.NumberFormat('en-US').format(resp[i].HARGA)+ '</div>',
+									resp[i].NOTES,
+
 								]);
 							}
 							dTableBSo.draw();
@@ -648,10 +654,8 @@
 						$("#KOTA").val(resp[0].KOTA);
 						$("#KD_BRG").val(resp[0].KD_BRG);
 						$("#NA_BRG").val(resp[0].NA_BRG);
-						$("#HARGA").val(resp[0].HARGA);
-						$("#KG").val(resp[0].KG);
-						$("#KIRIM").val(resp[0].KIRIM);
 						$("#SISA").val(resp[0].SISA);
+						$("#HARGA").val(resp[0].HARGA);
 					}
 				}
 			});
@@ -672,7 +676,7 @@
 			}	
 		}
 		
-		chooseSo = function(NO_SO,KODEC,NAMAC,ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, KIRIM, SISA ){
+		chooseSo = function(NO_SO,KODEC,NAMAC,ALAMAT, KOTA, KD_BRG, NA_BRG, SISA, HARGA){
 			$("#NO_SO").val(NO_SO);
 			$("#KODEC").val(KODEC);
 			$("#NAMAC").val(NAMAC);
@@ -951,18 +955,47 @@
 				alert("SO# Harus diisi.");
 			}
 			
+			// cek save format tgl otomatis
+
+			if (tgl.includes("-")) {
+				if ( tgl.substring(3,5) != bulanPer ) 
+				{
+					check = '1';
+					alert("Bulan tidak sama dengan Periode");
+				}	
+				
+				if ( tgl.substring(tgl.length-4) != tahunPer )
+				{
+					check = '1';
+					alert("Tahun tidak sama dengan Periode");
+				}	
+			}else{
+				if ( tgl.substring(2,4) != bulanPer ) 
+				{
+					check = '1';
+					alert("Bulan tidak sama dengan Periode");
+				}	
+				
+				if ( tgl.substring(tgl.length-4) != tahunPer )
+				{
+					check = '1';
+					alert("Tahun tidak sama dengan Periode");
+				}
+			}
+
+			//
 			
-			if ( tgl.substring(3,5) != bulanPer ) 
-			{
-				check = '1';
-				alert("Bulan tidak sama dengan Periode");
-			}	
+			// if ( tgl.substring(3,5) != bulanPer ) 
+			// {
+			// 	check = '1';
+			// 	alert("Bulan tidak sama dengan Periode");
+			// }	
 			
-			if ( tgl.substring(tgl.length-4) != tahunPer )
-			{
-				check = '1';
-				alert("Tahun tidak sama dengan Periode");
-		    }	 
+			// if ( tgl.substring(tgl.length-4) != tahunPer )
+			// {
+			// 	check = '1';
+			// 	alert("Tahun tidak sama dengan Periode");
+		    // }	 
 
 
 
@@ -1202,7 +1235,7 @@
 		var flagz = "{{ $flagz }}";
 		var golz = "{{ $golz }}";
 		var cari = $("#CARI").val();
-		var loc = "{{ url('/jual/edit/') }}" + '?idx={{ $header->NO_ID}}&tipx=search&flagz=' + encodeURIComponent(flagz) +'&golz=' + encodeURIComponent(goz) + '&buktix=' +encodeURIComponent(cari);
+		var loc = "{{ url('/jual/edit/') }}" + '?idx={{ $header->NO_ID}}&tipx=search&flagz=' + encodeURIComponent(flagz) +'&golz=' + encodeURIComponent(golz) + '&buktix=' +encodeURIComponent(cari);
 		window.location = loc;
 		
 	}

@@ -77,13 +77,13 @@ class PoController extends Controller
 			$filter_no_po = " and NO_PO='".$request->NO_PO."' ";
 		} 
 		
-			$po = DB::SELECT("SELECT NO_PO, TGL, KODES, NAMAS, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, KIRIM, SISA, NOTES from po
+			$po = DB::SELECT("SELECT NO_PO, DATE_FORMAT(po.TGL,'%d/%m/%Y') AS TGL, KODES, NAMAS, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, KIRIM, SISA, NOTES from po
                         WHERE YEAR (TGL) >= 2023  AND  GOL='$golz' AND SLS='0' $filter_no_po
                         ORDER BY KODES ASC ");
 						
 		if	( empty($po) ) {
 			
-			$po = DB::SELECT("SELECT NO_PO, TGL, KODES, NAMAS, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, KIRIM, SISA, NOTES from po
+			$po = DB::SELECT("SELECT NO_PO, DATE_FORMAT(po.TGL,'%d/%m/%Y') AS TGL, KODES, NAMAS, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, KIRIM, SISA, NOTES from po
                         WHERE YEAR (TGL) >= 2023  AND  GOL='$golz' AND SLS='0'
                         ORDER BY KODES ASC ");			
 		}
@@ -519,7 +519,7 @@ class PoController extends Controller
  
          
         return view('otransaksi_po.edit', $data)
-        ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'judul', $this->judul ]);
+        ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'judul'=> $this->judul ]);
 			 
     
       

@@ -81,13 +81,15 @@ class SoController extends Controller
 			$filter_no_so = " and NO_SO='".$request->NO_SO."' ";
 		} 
 		
-		    $so = DB::SELECT("SELECT NO_SO,TGL,  KODEC, NAMAC, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, KIRIM, SISA from so
+		    $so = DB::SELECT("SELECT NO_SO,DATE_FORMAT(so.TGL,'%d/%m/%Y') AS TGL,  KODEC, NAMAC, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, 
+                                    KIRIM, SISA, NOTES from so
                         WHERE YEAR (TGL) >= 2023  AND  GOL='$golz' AND SLS='0' $filter_no_so
                         ORDER BY KODEC ASC ");
 						
 		if	( empty($so) ) {
 			
-			$so = DB::SELECT("SELECT NO_SO,TGL,  KODEC, NAMAC, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, KIRIM, SISA from so
+			$so = DB::SELECT("SELECT NO_SO,DATE_FORMAT(so.TGL,'%d/%m/%Y') AS TGL,  KODEC, NAMAC, ALAMAT, KOTA, KD_BRG, NA_BRG, HARGA, KG, 
+                                    KIRIM, SISA, NOTES from so
                         WHERE YEAR (TGL) >= 2023  AND  GOL='$golz' AND SLS='0'
                         ORDER BY KODEC ASC ");			
 		}
@@ -499,7 +501,7 @@ class SoController extends Controller
  
          
          return view('otransaksi_so.edit', $data)
-		 ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'judul', $this->judul ]);
+		 ->with(['tipx' => $tipx, 'idx' => $idx, 'golz' =>$this->GOLZ, 'judul'=> $this->judul ]);
 			 
     
       
