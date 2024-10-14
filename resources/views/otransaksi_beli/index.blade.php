@@ -54,7 +54,8 @@
                             <th scope="col" style="text-align: left">Kode#</th>
                             <th scope="col" style="text-align: left">Suplier</th>
                             <th {{($flagz == 'BL') ? '' : 'hidden' }}  
-                                scope="col" style="text-align: right">Kg</th>
+                                scope="col" style="text-align: right">Kg
+                            </th>
                             <th scope="col" style="text-align: center">Total</th>
                             <th scope="col" style="text-align: center">RpTotal</th>							
                             <th scope="col" style="text-align: center">Notes</th>
@@ -165,23 +166,22 @@
                 "<'row'<'col-md-12't>><'row'<'col-md-12'ip>>",
 			stateSave:true,
 
-       });
+      });
+
+            if ( '{{$flagz}}' == 'BL' ) {
+              
+              dataTable.columns([7,11,12,13]).visible(true);
+              
+            }
+            else
+            {
+              
+              dataTable.columns([7,11,12,13]).visible(false);
+              
+            }
 
        $("div.test_btn").html('<a class="btn btn-lg btn-md btn-success" href="{{url('beli/edit?flagz='.$flagz.'&golz='.$golz.'&idx=0&tipx=new')}}"> <i class="fas fa-plus fa-sm md-3" ></i></a>');
 
-
-		
-		if ( '{{$flagz}}' == 'BL' ) {
-			datatable.column(7).visible(true, true)
-			datatable.column(11).visible(true, true)
-			datatable.column(12).visible(true, true)
-			datatable.column(13).visible(true, true)			
-		} else {
-			datatable.column(7).visible(false, false)
-			datatable.column(11).visible(false, false)			
-			datatable.column(12).visible(false, false)
-			datatable.column(13).visible(false, false)			
-		}
 		
 		
     });

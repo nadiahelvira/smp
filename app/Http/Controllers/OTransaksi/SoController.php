@@ -257,10 +257,6 @@ class SoController extends Controller
         $tahun    = substr(session()->get('periode')['tahun'], -2);
         // $query = DB::table('so')->select('NO_SO')->where('PER', $periode)->orderByDesc('NO_SO')->limit(1)->get();
         
-        // $query = DB::SELECT("SELECT TRIM(REPLACE(REPLACE(REPLACE(so.NO_SO, '\n', ' '), '\r', ' '), '\t', ' ')) as NO_SO
-        //                 FROM so
-        //                 WHERE PER='$periode' 
-        //                 ORDER BY NO_SO DESC LIMIT 1 ");
 
         $query = DB::table('so')->select(DB::raw("TRIM(NO_SO) AS NO_SO"))->where('PER', $periode)->orderByDesc('NO_SO')->limit(1)->get();
 
@@ -278,12 +274,27 @@ class SoController extends Controller
 
         // Insert Header
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
         // ganti 10
 
         $so = So::create(
             [
                 'NO_SO'         => $no_bukti,
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                //
+
                 'JTEMPO'              => date('Y-m-d', strtotime($request['JTEMPO'])),
                 'PER'              => $periode,
                 'RPRATE'           => '1',
@@ -532,10 +543,23 @@ class SoController extends Controller
         $GOLZ = $this->GOLZ;
         $judul = $this->judul;
 		
-		
+		// set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
         $so->update(
             [
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                //
+                
                 'JTEMPO'              => date('Y-m-d', strtotime($request['JTEMPO'])),
                 'KODEC'            => ($request['KODEC'] == null) ? "" : $request['KODEC'],
                 'NAMAC'            => ($request['NAMAC'] == null) ? "" : $request['NAMAC'],

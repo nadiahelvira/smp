@@ -266,8 +266,11 @@ class PoController extends Controller
 		
 		if ( $GOLZ == 'K' ) {
 	
-			$query = DB::table('po')->select('NO_PO')->where('PER', $periode)->where('GOL', $GOLZ)->orderByDesc('NO_PO')->limit(1)->get();
+			// $query = DB::table('po')->select('NO_PO')->where('PER', $periode)->where('GOL', $GOLZ)->orderByDesc('NO_PO')->limit(1)->get();
 			
+            $query = DB::table('po')->select(DB::raw("TRIM(NO_PO) AS NO_PO"))->where('PER', $periode)->where('GOL', $GOLZ)->orderByDesc('NO_PO')->limit(1)->get();
+
+
 			if ($query != '[]') {
 				$query = substr($query[0]->NO_PO, -4);
 				$query = str_pad($query + 1, 4, 0, STR_PAD_LEFT);
@@ -278,9 +281,12 @@ class PoController extends Controller
 
 		} else if ( $GOLZ == 'L' ) {
 
-			$query = DB::table('po')->select('NO_PO')->where('PER', $periode)->where('GOL', $GOLZ)->orderByDesc('NO_PO')->limit(1)->get();
+			// $query = DB::table('po')->select('NO_PO')->where('PER', $periode)->where('GOL', $GOLZ)->orderByDesc('NO_PO')->limit(1)->get();
+            
+            $query = DB::table('po')->select(DB::raw("TRIM(NO_PO) AS NO_PO"))->where('PER', $periode)->orderByDesc('NO_PO')->limit(1)->get();
 
-			if ($query != '[]') {
+			
+            if ($query != '[]') {
 				$query = substr($query[0]->NO_PO, -4);
 				$query = str_pad($query + 1, 4, 0, STR_PAD_LEFT);
 				$no_bukti = 'PL' . $tahun . $bulan . '-' . $query;
@@ -293,12 +299,25 @@ class PoController extends Controller
 		
         // Insert Header
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
         // ganti 10
 
         $po = Po::create(
             [
                 'NO_PO'         	=> $no_bukti,
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
                 'JTEMPO'              => date('Y-m-d', strtotime($request['JTEMPO'])),
                 'PER'              => $periode,
                 'KODES'            => ($request['KODES'] == null) ? "" : $request['KODES'],
@@ -558,10 +577,24 @@ class PoController extends Controller
         $GOLZ = $this->GOLZ;
         $judul = $this->judul;
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
 		
         $po->update(
             [
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                //
+
                 'JTEMPO'           => date('Y-m-d', strtotime($request['JTEMPO'])),
                 'KODES'            => ($request['KODES'] == null) ? "" : $request['KODES'],
                 'NAMAS'               => ($request['NAMAS'] == null) ? "" : $request['NAMAS'],

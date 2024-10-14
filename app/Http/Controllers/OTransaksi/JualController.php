@@ -264,8 +264,9 @@ class JualController extends Controller
 
             $query = DB::table('jual')->select(DB::raw("TRIM(NO_BUKTI) AS NO_BUKTI"))->where('PER', $periode)
 			         ->where('FLAG', 'JL')->where('GOL', 'K')->orderByDesc('NO_BUKTI')->limit(1)->get();
-			
-			if ($query != '[]') {
+            
+
+            if ($query != '[]') {
             
 				$query = substr($query[0]->NO_BUKTI, -4);
 				$query = str_pad($query + 1, 4, 0, STR_PAD_LEFT);
@@ -327,6 +328,12 @@ class JualController extends Controller
 
         // set format tgl otomatis TGL jadi 00-00-0000
         $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
         ///
 
         $jual = Jual::create(
@@ -335,7 +342,7 @@ class JualController extends Controller
 
                 // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
                 // set format tgl otomatis
-                'TGL'              => substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2),
+                'TGL'              => $input_tgl,
                 // 
                 
                 'PER'              => $periode,
@@ -656,11 +663,22 @@ class JualController extends Controller
 
         }
 		
-		
+		// set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
 
         $jual->update(
             [
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                //
                 'NO_SO'            => ($request['NO_SO'] == null) ? "" : $request['NO_SO'],
                 'KODEC'            => ($request['KODEC'] == null) ? "" : $request['KODEC'],
                 'NAMAC'            => ($request['NAMAC'] == null) ? "" : $request['NAMAC'],

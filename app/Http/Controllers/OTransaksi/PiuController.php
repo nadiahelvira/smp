@@ -246,10 +246,23 @@ class PiuController extends Controller
 
         // ganti 10
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
         $piu = Piu::create(
             [
                 'NO_BUKTI'         => $no_bukti,
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
                 'PER'              => $periode,
                 'NO_SO'            => ($request['NO_SO'] == null) ? "" : $request['NO_SO'],
                 'KODEC'            => ($request['KODEC'] == null) ? "" : $request['KODEC'],
@@ -260,6 +273,7 @@ class PiuController extends Controller
                 'FLAG'             => $FLAGZ,
                 'GOL'               => $GOLZ,
                 'NOTES'            => ($request['NOTES'] == null) ? "" : $request['NOTES'],
+                'TYPE'            => ($request['TYPE'] == null) ? "" : $request['TYPE'],
                 'TOTAL'            => (float) str_replace(',', '', $request['TOTAL']),
                 'BAYAR'            => (float) str_replace(',', '', $request['BAYAR']),
                 'LAIN'            => (float) str_replace(',', '', $request['LAIN']),
@@ -508,15 +522,29 @@ class PiuController extends Controller
 
         $periode = $request->session()->get('periode')['bulan'] . '/' . $request->session()->get('periode')['tahun'];
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
         $piu->update(
             [
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
                 'NO_SO'            => ($request['NO_SO'] == null) ? "" : $request['NO_SO'],
                 'KODEC'            => ($request['KODEC'] == null) ? "" : $request['KODEC'],
                 'NAMAC'                => ($request['NAMAC'] == null) ? "" : $request['NAMAC'],
                 'BACNO'            => ($request['BACNO'] == null) ? "" : $request['BACNO'],
                 'BNAMA'                => ($request['BNAMA'] == null) ? "" : $request['BNAMA'],
                 'NOTES'            => ($request['NOTES'] == null) ? "" : $request['NOTES'],
+                'TYPE'            => ($request['TYPE'] == null) ? "" : $request['TYPE'],
                 'BAYAR'            => (float) str_replace(',', '', $request['BAYAR']),
                 'TOTAL'            => (float) str_replace(',', '', $request['TOTAL']),
                 'LAIN'            => (float) str_replace(',', '', $request['LAIN']),

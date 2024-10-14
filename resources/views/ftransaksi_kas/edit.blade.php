@@ -78,15 +78,12 @@
 							
         
 							<div class="form-group row">
-                                <div class="col-md-1">
-                                    <label for="TGL" class="form-label">Tgl</label>
+								<div class="col-md-1" align="left">
+                                    <label for="TGL" class="form-label">Tanggal</label>
                                 </div>
-                                
-								<div class="col-md-2">
- 
-								  <input class="form-control date" id="TGL" name="TGL" data-date-format="dd-mm-yyyy" type="text" autocomplete="off" value="{{date('d-m-Y',strtotime($header->TGL))}}" >
-								
-								</div>		
+                                <div class="col-md-2">
+									<input class="form-control date" onclick="select()" id="TGL" name="TGL" data-date-format="dd-mm-yyyy" type="text" autocomplete="off" value="{{date('d-m-Y',strtotime($header->TGL))}}">
+                                </div>	
 								
                             </div>
         
@@ -558,17 +555,48 @@
                     alert("Kas# Harus diisi.");
                 }
 
-                if (tgl.substring(3, 5) != bulanPer) {
+                // cek save format tgl otomatis
 
-                    check = '1';
-                    alert("Bulan tidak sama dengan Periode");
-                }
-
-                if (tgl.substring(tgl.length - 4) != tahunPer) {
-                    check = '1';
-                    alert("Tahun tidak sama dengan Periode");
-
+			if (tgl.includes("-")) {
+				if ( tgl.substring(3,5) != bulanPer ) 
+				{
+					check = '1';
+					alert("Bulan tidak sama dengan Periode");
+				}	
+				
+				if ( tgl.substring(tgl.length-4) != tahunPer )
+				{
+					check = '1';
+					alert("Tahun tidak sama dengan Periode");
+				}	
+			}else{
+				if ( tgl.substring(2,4) != bulanPer ) 
+				{
+					check = '1';
+					alert("Bulan tidak sama dengan Periode");
+				}	
+				
+				if ( tgl.substring(tgl.length-4) != tahunPer )
+				{
+					check = '1';
+					alert("Tahun tidak sama dengan Periode");
 				}
+			}
+
+			//
+
+
+			// if ( tgl.substring(3,5) != bulanPer ) 
+			// {
+			// 	check = '1';
+			// 	alert("Bulan tidak sama dengan Periode");
+			// }	
+			
+			// if ( tgl.substring(tgl.length-4) != tahunPer )
+			// {
+			// 	check = '1';
+			// 	alert("Tahun tidak sama dengan Periode");
+		    // }	
 
 
 		(check==0) ? document.getElementById("entri").submit() : alert('Masih ada kesalahan');

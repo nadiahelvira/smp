@@ -73,16 +73,16 @@
                     <thead class="table-dark">
                         <tr>
                             <th scope="col" style="text-align: center">#</th>
-				     		<th scope="col" style="text-align: center">-</th>							
+				     		            <th scope="col" style="text-align: center">-</th>							
                             <th scope="col" style="text-align: center">Bukti#</th>
                             <th scope="col" style="text-align: center">Tgl</th>
                             <th scope="col" style="text-align: center">So#</th>
                             <th scope="col" style="text-align: center">Customer#</th>
                             <th scope="col" style="text-align: center">Nama</th>
-							<th scope="col" style="text-align: center">Kota</th>
+							              <th scope="col" style="text-align: center">Kota</th>
                             <th scope="col" style="text-align: center">Bayar</th>
                             <th scope="col" style="text-align: center">Notes</th>
-                            <th scope="col" style="text-align: center">Bank#</th>
+                            <!-- <th scope="col" style="text-align: center">Bank#</th> -->
                             <th scope="col" style="text-align: center">User</th>
                         </tr>
                     </thead>
@@ -130,8 +130,8 @@
                 {data: 'KOTA', name: 'KOTA'},
                 {data: 'BAYAR', name: 'BAYAR',render: $.fn.dataTable.render.number( ',', '.', 0, '' )},
                 {data: 'NOTES', name: 'NOTES'},
-                {data: 'NO_BANK', name: 'NO_BANK'},
-				{data: 'USRNM', name: 'USRNM'},
+                // {data: 'NO_BANK', name: 'NO_BANK'},
+				        {data: 'USRNM', name: 'USRNM'},
             ],
 
             columnDefs: [

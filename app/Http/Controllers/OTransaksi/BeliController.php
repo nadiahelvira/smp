@@ -227,7 +227,8 @@ class BeliController extends Controller
 
             $query = DB::table('beli')->select(DB::raw("TRIM(NO_BUKTI) AS NO_BUKTI"))->where('PER', $periode)
 			         ->where('FLAG', 'BL')->where('GOL', 'K')->orderByDesc('NO_BUKTI')->limit(1)->get();
-			
+
+
 			if ($query != '[]') {
             
 				$query = substr($query[0]->NO_BUKTI, -4);
@@ -242,7 +243,8 @@ class BeliController extends Controller
 
             $query = DB::table('beli')->select(DB::raw("TRIM(NO_BUKTI) AS NO_BUKTI"))->where('PER', $periode)
 			         ->where('FLAG', 'BL')->where('GOL', 'L')->orderByDesc('NO_BUKTI')->limit(1)->get();
-			
+            
+
 			if ($query != '[]') {
             
 				$query = substr($query[0]->NO_BUKTI, -4);
@@ -350,6 +352,12 @@ class BeliController extends Controller
 
         // set format tgl otomatis TGL jadi 00-00-0000
         $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
         ///
 
         $beli = Beli::create(
@@ -357,7 +365,7 @@ class BeliController extends Controller
                 'NO_BUKTI'         => $no_bukti,
                 // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
                 // set format tgl otomatis
-                'TGL'              => substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2),
+                'TGL'              => $input_tgl,
                 // 
                 'PER'              => $periode,
                 'NO_BL'            => ($request['NO_PO'] == null) ? "" : $request['NO_BL'],
@@ -655,11 +663,22 @@ class BeliController extends Controller
 
         }
 		
-		
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
 
         $beli->update(
             [
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
 				'NO_BL'            => ($request['NO_PO'] == null) ? "" : $request['NO_BL'],
                 'NO_PO'            => ($request['NO_PO'] == null) ? "" : $request['NO_PO'],
                 'ALAMAT'           => ($request['ALAMAT'] == null) ? "" : $request['ALAMAT'],

@@ -178,12 +178,25 @@ class BankController extends Controller
 
         // Insert Header
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
         // ganti 10
 
         $bank = Bank::create(
             [
                 'NO_BUKTI'         => $no_bukti,
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
                 'PER'              => $periode,
                 'BACNO'            => ($request['BACNO'] == null) ? "" : $request['BACNO'],
                 'BNAMA'            => ($request['BNAMA'] == null) ? "" : $request['BNAMA'],
@@ -222,7 +235,8 @@ class BankController extends Controller
                 $detail->NACNO    = ($NACNO[$key] == null) ? "" :  $NACNO[$key];
                 $detail->URAIAN    = ($URAIAN[$key] == null) ? "" :  $URAIAN[$key];
                 $detail->JUMLAH    = (float) str_replace(',', '', $JUMLAH[$key]);
-                $detail->DEBET    = (float) str_replace(',', '', $JUMLAH[$key]);
+                $detail->DEBET    = ($FLAGZ == 'BBM') ? (float) str_replace(',', '', $JUMLAH[$key] ) : (float) str_replace(',', '', '0' );
+				$detail->KREDIT    = ($FLAGZ == 'BBK') ? (float) str_replace(',', '', $JUMLAH[$key] ) : (float) str_replace(',', '', '0' );
                 $detail->save();
             }
         }
@@ -424,12 +438,25 @@ class BankController extends Controller
 		
         $periode = $request->session()->get('periode')['bulan'] . '/' . $request->session()->get('periode')['tahun'];
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
 
         $bank->update(
             [
 
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
-                'BACNO'            => ($request['BACNO'] == null) ? "" : $request['BACNO'],
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
+				'BACNO'            => ($request['BACNO'] == null) ? "" : $request['BACNO'],
                 'BNAMA'            => ($request['BNAMA'] == null) ? "" : $request['BNAMA'],
                 'BG'               => ($request['BG'] == null) ? "" : $request['BG'],
                 'JTEMPO'           => date('Y-m-d', strtotime($request['JTEMPO'])),
@@ -471,8 +498,9 @@ class BankController extends Controller
                         'NACNO'      => ($NACNO[$i] == null) ? "" : $NACNO[$i],
                         'URAIAN'     => ($URAIAN[$i] == null) ? "" : $URAIAN[$i],
                         'JUMLAH'     => (float) str_replace(',', '', $JUMLAH[$i]),
-                        'DEBET'      => (float) str_replace(',', '', $JUMLAH[$i])
-                    ]
+                        'DEBET'      => ($FLAGZ == 'BBM') ? (float) str_replace(',', '', $JUMLAH[$i] ) : (float) str_replace(',', '', '0' ),
+                        'KREDIT'      => ($FLAGZ == 'BBK') ? (float) str_replace(',', '', $JUMLAH[$i] ) : (float) str_replace(',', '', '0' ),
+                        ]
                 );
             } else {
                 // Update jika NO_ID sudah ada
@@ -488,7 +516,8 @@ class BankController extends Controller
                         'NACNO'      => ($NACNO[$i] == null) ? "" : $NACNO[$i],
                         'URAIAN'     => ($URAIAN[$i] == null) ? "" : $URAIAN[$i],
                         'JUMLAH'     => (float) str_replace(',', '', $JUMLAH[$i]),
-                        'DEBET'      => (float) str_replace(',', '', $JUMLAH[$i])
+                        'DEBET'      => ($FLAGZ == 'BBM') ? (float) str_replace(',', '', $JUMLAH[$i] ) : (float) str_replace(',', '', '0' ),
+                        'KREDIT'      => ($FLAGZ == 'BBK') ? (float) str_replace(',', '', $JUMLAH[$i] ) : (float) str_replace(',', '', '0' ),
                     ]
                 );
             }

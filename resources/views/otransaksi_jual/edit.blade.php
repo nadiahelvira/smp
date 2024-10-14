@@ -630,7 +630,7 @@
 							for(i=0; i<resp.length; i++){
 								
 								dTableBSo.row.add([
-									'<a href="javascript:void(0);" onclick="chooseSo(\''+resp[i].NO_SO+'\', \''+resp[i].KODEC+'\', \''+resp[i].NAMAC+'\', \''+resp[i].TGL+'\', \''+resp[i].KOTA+'\' , \''+resp[i].KD_BRG+'\' , \''+resp[i].NA_BRG+'\' , \''+resp[i].HARGA+'\', \''+resp[i].KG+'\', \''+resp[i].KIRIM+'\', \''+resp[i].SISA+'\'  )">'+resp[i].NO_SO+'</a>',
+									'<a href="javascript:void(0);" onclick="chooseSo(\''+resp[i].NO_SO+'\', \''+resp[i].KODEC+'\', \''+resp[i].NAMAC+'\', \''+resp[i].ALAMAT+'\', \''+resp[i].KOTA+'\' , \''+resp[i].KD_BRG+'\' , \''+resp[i].NA_BRG+'\' , \''+resp[i].KIRIM+'\', \''+resp[i].SISA+'\', \''+resp[i].HARGA+'\'  )">'+resp[i].NO_SO+'</a>',
 									resp[i].TGL,
 									resp[i].NAMAC,
 									resp[i].NA_BRG,
@@ -676,7 +676,9 @@
 			}	
 		}
 		
-		chooseSo = function(NO_SO,KODEC,NAMAC,ALAMAT, KOTA, KD_BRG, NA_BRG, SISA, HARGA){
+
+		
+		chooseSo = function(NO_SO, KODEC, NAMAC, ALAMAT, KOTA, KD_BRG, NA_BRG, KIRIM, SISA, HARGA){
 			$("#NO_SO").val(NO_SO);
 			$("#KODEC").val(KODEC);
 			$("#NAMAC").val(NAMAC);

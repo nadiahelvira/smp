@@ -181,7 +181,7 @@ class HutController extends Controller
 		if ( $request->flagz == 'PH' && $request->golz == 'K' ) {
 
             $query = DB::table('hut')->select(DB::raw("TRIM(NO_BUKTI) AS NO_BUKTI"))->where('PER', $periode)
-			         ->where('FLAG', 'PH')->where('GOL', 'A1')->orderByDesc('NO_BUKTI')->limit(1)->get();
+			         ->where('FLAG', 'PH')->where('GOL', 'K')->orderByDesc('NO_BUKTI')->limit(1)->get();
 			
 			if ($query != '[]') {
             
@@ -196,7 +196,7 @@ class HutController extends Controller
         } else if ( $request->flagz == 'PH' && $request->golz == 'L' ) {
 
             $query = DB::table('hut')->select(DB::raw("TRIM(NO_BUKTI) AS NO_BUKTI"))->where('PER', $periode)
-			         ->where('FLAG', 'PH')->where('GOL', 'A2')->orderByDesc('NO_BUKTI')->limit(1)->get();
+			         ->where('FLAG', 'PH')->where('GOL', 'L')->orderByDesc('NO_BUKTI')->limit(1)->get();
 			
 			if ($query != '[]') {
             
@@ -265,18 +265,32 @@ class HutController extends Controller
 
         // Insert Header
 
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
         // ganti 10
 
         $hut = Hut::create(
             [
                 'NO_BUKTI'         => $no_bukti,
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
                 'PER'              => $periode,
                 'NO_PO'            => ($request['NO_PO'] == null) ? "" : $request['NO_PO'],
                 'KODES'            => ($request['KODES'] == null) ? "" : $request['KODES'],
                 'NAMAS'            => ($request['NAMAS'] == null) ? "" : $request['NAMAS'],
                 'BACNO'            => ($request['BACNO'] == null) ? "" : $request['BACNO'],
                 'BNAMA'            => ($request['BNAMA'] == null) ? "" : $request['BNAMA'],
+                'TYPE'            => ($request['TYPE'] == null) ? "" : $request['TYPE'],
                 // 'NO_BANK'          => $no_bukti2,
                 'FLAG'             =>  $FLAGZ,
                 'GOL'               => $GOLZ,
@@ -533,6 +547,16 @@ class HutController extends Controller
         $GOLZ = $this->GOLZ;
         $judul = $this->judul;	
 		
+        // set format tgl otomatis TGL jadi 00-00-0000
+        $tgl_rubah = $request['TGL'];
+        $input_tgl = '';
+        if (str_contains($tgl_rubah, '-')) {
+            $input_tgl = date('Y-m-d', strtotime($tgl_rubah));
+        }else{
+            $input_tgl = substr($tgl_rubah, 4, 4)."-".substr($tgl_rubah, 2, 2)."-".substr($tgl_rubah, 0, 2);
+        }
+        ///
+
 		
         // ganti 20
         //$variablell = DB::select('call hutdel(?,?)', array($hut['NO_BUKTI'], '0'));
@@ -545,13 +569,17 @@ class HutController extends Controller
 
         $hut->update(
             [
-                'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // 'TGL'              => date('Y-m-d', strtotime($request['TGL'])),
+                // set format tgl otomatis
+                'TGL'              => $input_tgl,
+                // 
                 'NO_PO'            => ($request['NO_PO'] == null) ? "" : $request['NO_PO'],
                 'KODES'            => ($request['KODES'] == null) ? "" : $request['KODES'],
                 'NAMAS'                => ($request['NAMAS'] == null) ? "" : $request['NAMAS'],
                 'BACNO'            => ($request['BACNO'] == null) ? "" : $request['BACNO'],
                 'BNAMA'                => ($request['BNAMA'] == null) ? "" : $request['BNAMA'],
                 'NOTES'            => ($request['NOTES'] == null) ? "" : $request['NOTES'],
+                'TYPE'            => ($request['TYPE'] == null) ? "" : $request['TYPE'],
                 'BAYAR'            => (float) str_replace(',', '', $request['BAYAR']),
                 'TOTAL'            => (float) str_replace(',', '', $request['TOTAL']),
                 'LAIN'            => (float) str_replace(',', '', $request['LAIN']),

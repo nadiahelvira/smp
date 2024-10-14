@@ -401,7 +401,7 @@
 	
 
 	<div class="modal fade" id="browsePoModal" tabindex="-1" role="dialog" aria-labelledby="browsePoModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
+	  <div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="browsePoModalLabel">Cari Po#</h5>
@@ -436,7 +436,7 @@
 	</div>
 	
 	<div class="modal fade" id="browseAccountModal" tabindex="-1" role="dialog" aria-labelledby="browseAccountModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
+	  <div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="browseAccountModalLabel">Cari Account</h5>
@@ -465,7 +465,7 @@
 	
 
 	<div class="modal fade" id="browseMklModal" tabindex="-1" role="dialog" aria-labelledby="browseMklModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
+	  <div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="browseMklModalLabel">Cari EMKL</h5>
@@ -493,7 +493,7 @@
 	</div>
 
 	<div class="modal fade" id="browsePoxModal" tabindex="-1" role="dialog" aria-labelledby="browsePoxModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
+	  <div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title" id="browsePoxModalLabel">Cari Po#</h5>
@@ -749,7 +749,7 @@
 							for(i=0; i<resp.length; i++){
 								
 								dTableBPo.row.add([
-									'<a href="javascript:void(0);" onclick="choosePo(\''+resp[i].NO_PO+'\', \''+resp[i].KODES+'\', \''+resp[i].NAMAS+'\', \''+resp[i].TGL+'\', \''+resp[i].KOTA+'\' , \''+resp[i].KD_BRG+'\' , \''+resp[i].NA_BRG+'\' , \''+resp[i].HARGA+'\', \''+resp[i].KIRIM+'\', \''+resp[i].SISA+'\'  )">'+resp[i].NO_PO+'</a>',
+									'<a href="javascript:void(0);" onclick="choosePo(\''+resp[i].NO_PO+'\', \''+resp[i].KODES+'\', \''+resp[i].NAMAS+'\', \''+resp[i].TGL+'\', \''+resp[i].KOTA+'\' , \''+resp[i].KD_BRG+'\' , \''+resp[i].NA_BRG+'\', \''+resp[i].KIRIM+'\', \''+resp[i].SISA+'\' , \''+resp[i].HARGA+'\'  )">'+resp[i].NO_PO+'</a>',
 									resp[i].TGL,
 									resp[i].NAMAS,
 									resp[i].NA_BRG,
@@ -795,7 +795,7 @@
 			}	
 		}
 		
-		choosePo = function(NO_PO,KODES,NAMAS,ALAMAT, KOTA, KD_BRG, NA_BRG, SISA, HARGA ){
+		choosePo = function(NO_PO,KODES,NAMAS,ALAMAT, KOTA, KD_BRG, NA_BRG, KIRIM, SISA, HARGA ){
 			$("#NO_PO").val(NO_PO);
 			$("#KODES").val(KODES);
 			$("#NAMAS").val(NAMAS);

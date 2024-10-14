@@ -21,6 +21,6 @@ class Piu extends Model
     [
        "NO_BUKTI", "TGL", "NO_SO", "PER","KODEC", "NAMAC",  "TOTAL", "BAYAR", "GOL", "BACNO", "BNAMA", "FLAG", "NO_BANK",
 	   "USRNM", "TG_SMP", "NOTES","created_by", "updated_by",
-       "deleted_by"
+       "deleted_by", "TYPE"
     ];
 }
