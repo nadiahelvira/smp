@@ -478,7 +478,7 @@
 				<reportElement mode="Transparent" x="320" y="18" width="147" height="18" uuid="9bb27be0-1d80-4bc5-90cc-0994460593e3"/>
 			</rectangle>
 			<textField pattern="#,##0">
-				<reportElement x="390" y="0" width="76" height="18" uuid="bd98b256-3570-4ff3-bae2-bde376531481"/>
+				<reportElement x="390" y="0" width="77" height="18" uuid="bd98b256-3570-4ff3-bae2-bde376531481"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -491,7 +491,7 @@
 				<textFieldExpression><![CDATA[$V{TOTAL}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="467" y="0" width="82" height="18" uuid="710c8d47-2014-49b9-938d-97a4bca049ac"/>
+				<reportElement x="467" y="0" width="83" height="18" uuid="710c8d47-2014-49b9-938d-97a4bca049ac"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -517,7 +517,7 @@
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="467" y="18" width="82" height="18" uuid="2dc19cb4-0931-48ee-8b1c-8a02f868a7a8"/>
+				<reportElement x="467" y="18" width="83" height="18" uuid="2dc19cb4-0931-48ee-8b1c-8a02f868a7a8"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
