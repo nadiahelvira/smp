@@ -441,7 +441,7 @@
 				<textElement textAlignment="Left">
 					<font fontName="CourierN" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["PT. Subur Harapan Indah "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PT. Subur Mega Perkasa "]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="271" y="0" width="49" height="18" uuid="4b043107-ac06-4fcc-a05c-a1d7c59f5471"/>
